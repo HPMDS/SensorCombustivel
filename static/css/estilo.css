@@ -1,0 +1,13 @@
+body{
+    background-color:#CCC;
+}
+
+input:focus{
+    outline: none !important;
+    border:2px solid red;
+    box-shadow: 0 010px #719ECE;
+}
+
+.tudo,.titulo{
+    padding: 2rem;
+}

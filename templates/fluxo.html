@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  {% include 'head.html' %}
+  </head>
+  
+  <body>
+    {% include 'cabecalho.html' %}
+    
+    <div class="tudo">
+        <h4>Status: <b id="status">Online</b>!</h4>
+        
+
+        <h2>Medido: <b><span id="litros">{{d['litros']}}</span><span> Litros</span></b></h2>
+        <h2>Fluxo: <b><span id="fluxo">{{d['fluxo']}}</span><span> L/Min</span></b></h2>
+    </div>
+    
+    <script>
+        function atualiza(){
+            fetch('/api_fluxo')
+                .then(response=>response.json())
+                .then(dados=>{
+                        console.log(dados);
+                
+                        document.getElementById('fluxo').innerText=dados.sensores[0].fluxo_fmt;
+                        document.getElementById('litros').innerText=dados.sensores[0].litros_fmt;
+                        
+                        if(dados.status=='ok'){
+                            document.getElementById('status').innerText='Online';
+                        }else{
+                            document.getElementById('status').innerText='Offline';
+                        }
+                    })
+                .catch(error=>{
+                        document.getElementById('status').innerText='Erro';
+                    });
+            
+            setTimeout(atualiza,3000);
+        };
+        
+        setTimeout(atualiza,3000);
+    </script>
+  </body>
+</html>

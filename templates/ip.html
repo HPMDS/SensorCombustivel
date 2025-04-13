@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    {% include 'head.html' %}
+        <script src="/static/js/mask.ip-input.js"></script>
+        
+        <script>
+            $(document).ready(function(){
+                $('[ip-mask]').ipAddress();
+            });
+        </script>
+    </head>
+  
+    <body>
+        {% include 'cabecalho.html' %}
+    
+        <div class="tudo">
+            <h3>IP atual: <b>{{ d['ip_atual'] }}</b></h3>
+        
+            <form method="POST">
+                <div class="form-group">
+                    <label for="seuip">Seu IP</label>
+                    <input name="ip" ip-mask placeholder="000.000.000.000" class="form-control" id="seuip" value="{{ d['configs']['ip'] }}" type="text" minlength="7" maxlength="15" size="15" pattern="^(?>(\d|[1-9]\d{2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(?1)$" autofocus>
+                </div>
+              
+                <div class="form-group">
+                    <label for="subrede">Máscara de Sub-Rede</label>
+                    <input name="subrede" ip-mask placeholder="SSS.SSS.SSS.SSS" class="form-control" id="subrede" value="{{ d['configs']['subrede'] }}" type="text" minlength="7" maxlength="15" size="15" pattern="^(?>(\d|[1-9]\d{2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(?1)$">
+                </div>
+              
+                <div class="form-group">
+                    <label for="gateway">Gateway</label>
+                    <input name="gateway" ip-mask placeholder="000.000.000.000" class="form-control" value="{{ d['configs']['gateway'] }}" id="gateway" type="text" minlength="7" maxlength="15" size="15" pattern="^(?>(\d|[1-9]\d{2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(?1)$">
+                </div>
+
+                <div class="form-group">
+                    <label for="dns">DNS</label>
+                    <input name="dns" ip-mask placeholder="xxx.xxx.xxx.xxx" class="form-control" id="dns" value="{{ d['configs']['dns'] }}" type="text" minlength="7" maxlength="15" size="15" pattern="^(?>(\d|[1-9]\d{2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(?1)$">
+                </div>
+
+
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Enviar</button>
+            </form>
+        </div>
+    </body>
+</html>
+
